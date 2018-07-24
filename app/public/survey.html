@@ -7,10 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div id="myModal" class="jumbotron">
+        <div id="contentDump">
+    
+        </div>
+        <a href="/survey" id="modal-button">
+            <button type="submit" class="col s6 btn-primary btn">
+                Take Survery!
+            </button>
+        </a>
+    </div>
+    <div class="container-fluid" id="topBox">
         <div class="jumbotron">
             <div style="text-align: center">
                 <h1>
@@ -33,8 +44,176 @@
                     </a>
                 </div>
             </div>
+            <div class="row" style="margin-top: 5%">
+               
+                <div class="col s4" id="formContainer" style="text-align: center">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">What is your name?</label>
+                            <br>
+                            <input type="text" name="name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Upload a link to an image file</label>
+                            <br>
+                            <input type="text" name="photo" id="photo">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Question #1 - How much do you like javascript?</label>
+                            <select class="form-control" id="quest1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Question #2 - How much do you like Bootstrap?</label>
+                            <select class="form-control" id="quest2">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Question #3 - How much do you like CSS?</label>
+                            <select class="form-control" id="quest3">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Question #4 - How much do you like HTML?</label>
+                            <select class="form-control" id="quest4">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Question #5 - How much do you like Materialize?</label>
+                            <select class="form-control" id="quest5">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Question #6 - How much do you like SASS?</label>
+                            <select class="form-control" id="quest6">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Question #7 - How much do you like Ruby on Rails?</label>
+                            <select class="form-control" id="quest7">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Question #8 - How much do you like Node.js?</label>
+                            <select class="form-control" id="quest8">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Question #9 - How much do you like express.node?</label>
+                            <select class="form-control" id="quest9">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Question #10 - How much do you like Visual Code Studio?</label>
+                            <select class="form-control" id="quest10">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" type="submit" id="submitButton">Submit</button>
+                    </form>
+                </div>
+                </div>
+
+
         </div>
     </div>
 </body>
+<script>
+    $(document).ready(function () {
+        $("#myModal").hide();
+
+
+        $("#submitButton").on("click", (event) => {
+            event.preventDefault();
+            console.log("hello");
+            var friends = {
+                name: $("#name").val().trim(),
+                photo: $("#photo").val().trim(),
+                scores: [
+                    $("#quest1").val().trim(),
+                    $("#quest2").val().trim(),
+                    $("#quest3").val().trim(),
+                    $("#quest4").val().trim(),
+                    $("#quest5").val().trim(),
+                    $("#quest6").val().trim(),
+                    $("#quest7").val().trim(),
+                    $("#quest8").val().trim(),
+                    $("#quest9").val().trim(),
+                    $("#quest10").val().trim()
+                ]
+            }
+            console.log(friends);
+            $.post("/api/friends", friends)
+                .then(function (data) {
+                    console.log("Adding character...");
+                    console.log(data);
+
+                    $("#myModal").show();
+                    $("#topBox").hide();
+
+                var newDiv = $("<div>");
+                    newDiv.text(data.name+data.photo+data.score);
+                    $("#contentDump").append(newDiv);
+
+
+
+                });
+        })
+        $("modal-button").on("click", (event) => {
+            $("#formContainer").attr("display", "inline-block");
+            $("#modal").attr("display", "none");
+        })
+    });
+</script>
 
 </html>
